@@ -15,4 +15,4 @@ the `ActionPlugin` system was replaced by
 
 ## Screenshot (Android arm64)
 
-![screenshot](screenshot.jpg)
+<img src="screenshot.jpg" alt="screenshot" width="200"/>
