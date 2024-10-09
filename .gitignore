@@ -4,7 +4,7 @@ target/
 
 # cargo-mobile2
 .cargo/
-/gen/android/app
+/gen/android/app/build
 
 # macOS
 .DS_Store
