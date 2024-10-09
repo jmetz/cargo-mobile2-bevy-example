@@ -1,0 +1,105 @@
+[package]
+name = "hello-bevy"
+version = "0.1.0"
+authors = ["Jeremy Metz <metz.jp@gmail.com>"]
+edition = "2018"
+exclude = ["gen", "assets", "credits"]
+
+
+[package.metadata.cargo-apple.ios]
+frameworks = ["AudioToolbox"]
+
+[package.metadata.cargo-android]
+# app-activity-name = "com.example.hello_wry.MainActivity"
+assets = "./assets"
+project-dependencies = [ "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21" ]
+app-plugins = [ "org.jetbrains.kotlin.android" ]
+# app-permissions = [ "android.permission.INTERNET" ]
+# app-theme-parent = "Theme.MaterialComponents.DayNight.DarkActionBar"
+vulkan-validation = false
+# strip = "symbols"
+build_targets = ["aarch64-linux-android"]
+
+[profile.dev.package."*"]
+opt-level = 3
+
+[profile.dev]
+opt-level = 1
+# NOTE: See .cargo/config.toml for further target-level config
+
+[profile.release]
+opt-level = "s"
+lto = true
+codegen-units = 1
+strip = true
+
+# Profile for distribution
+[profile.dist]
+inherits = "release"
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
+
+
+[lib]
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "hello-bevy-desktop"
+path = "gen/bin/desktop.rs"
+
+[dependencies]
+# mobile-entry-point = "0.1.1"
+bevy = { version = "0.14", default-features = false, features = [
+    "animation",
+    "bevy_asset",
+    "bevy_audio",
+    "bevy_state",
+    "bevy_color",
+    "bevy_gilrs",
+    "bevy_scene",
+    "bevy_winit",
+    "bevy_core_pipeline",
+    "bevy_pbr",
+    "bevy_gltf",
+    "bevy_render",
+    "bevy_sprite",
+    "bevy_text",
+    "bevy_ui",
+    "multi_threaded",
+    "png",
+    "hdr",
+    "x11",
+    "vorbis",
+    "bevy_gizmos",
+    "tonemapping_luts",
+    "smaa_luts",
+    "default_font",
+    "webgl2",
+    "sysinfo_plugin",
+] }
+# bevy_audio = { version = "0.14.2", features = ["cpal"] }
+image = { version = "0.25", default-features = false }
+log = { version = "0.4", features = ["max_level_debug", "release_max_level_warn"] }
+
+[target.'cfg(not(target_os = "android"))'.dependencies]
+env_logger = "0.11.5"
+winit = { version = "0.30", default-features = false }
+
+[target.'cfg(target_os = "android")'.dependencies]
+winit = { version = "0.30", default-features = false, features = [ "android-native-activity" ]}
+android-activity = "0.6"
+android_logger = "0.13"
+# jni = "0.21.0"
+paste = "1.0"
+
+# [target.'cfg(target_os = "android")'.dependencies]
+# ndk-glue = "0.2.1"
+
+# [patch.crates-io]
+# cpal = { git = "https://github.com/francesca64/cpal", branch = "fran-ios" }
+
+[build-dependencies]
+# embed-resource = "1"
+embed-resource = "1.4"

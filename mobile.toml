@@ -1,0 +1,5 @@
+[app]
+name = "hello-bevy"
+stylized-name = "Hello Bevy"
+identifier = "com.example.hello_bevy"
+template-pack = "bevy-demo"
