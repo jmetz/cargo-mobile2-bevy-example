@@ -13,3 +13,6 @@ the `ActionPlugin` system was replaced by
 [here](https://github.com/NiklasEi/bevy_game_template/issues/122) for a
  discussion about that.
 
+## Screenshot (Android arm64)
+
+![screenshot](screenshot.jpg)
